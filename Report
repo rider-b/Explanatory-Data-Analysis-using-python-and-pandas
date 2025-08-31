@@ -1,0 +1,74 @@
+Explanatory Data Analysis (EDA) on the Titanic Dataset
+Project: EDA using Python, Pandas, Matplotlib, and Seaborn
+Date: August 30, 2025
+
+1. Introduction
+Exploratory Data Analysis (EDA) is the process of analyzing and visualizing a dataset to summarize its main characteristics, identify patterns, uncover anomalies, and check assumptions before formal modeling. This report documents the EDA performed on the Titanic dataset. The goal is to understand the factors that influenced passenger survival.
+
+2. Data Loading and Initial Inspection
+The analysis began by loading the dataset into a pandas DataFrame. The following initial checks were performed:
+
+.head(): Displayed the first five rows to get a feel for the data's structure and features.
+
+.info(): Provided a concise summary, showing 891 entries, column names, data types (e.g., int64, object), and non-null counts. This immediately highlighted columns with missing data like Age, Deck, and Embarked.
+
+.describe(): Generated descriptive statistics for numerical columns (mean, median, std dev, etc.) and categorical columns (count, unique values, top value, frequency).
+
+Initial Findings:
+
+The dataset contains 891 passenger records and 15 columns.
+
+Missing Data: age, deck, and embarked have missing values. deck is missing over 77% of its data.
+
+Data Types: A mix of numerical (age, fare) and categorical (sex, pclass, embarked) data exists.
+
+3. Data Cleaning: Handling Missing Values
+To prepare the data for analysis, missing values were addressed:
+
+Age: Missing age values were imputed using the median age of all passengers. The median is more robust to outliers than the mean.
+
+Embarked: The few missing embarked values were filled with the mode (the most common port of embarkation), which was 'S' (Southampton).
+
+Deck: Due to the high percentage of missing values, the deck column was dropped from the DataFrame as it would be difficult to impute accurately without making significant assumptions.
+
+4. Data Visualization and Key Insights
+Visualizations were created to explore the data from different angles.
+
+Univariate Analysis (Single Variable)
+Age Distribution: A histogram showed the age distribution was skewed towards younger passengers, with a significant number of people in their 20s and 30s.
+
+Survival Count: A count plot revealed that more passengers died (approx. 550) than survived (approx. 340).
+
+Passenger Class: The majority of passengers were in the 3rd class, followed by 1st and then 2nd.
+
+Bivariate Analysis (Two Variables)
+Survival by Sex: A bar chart clearly showed that females had a much higher survival rate (around 75%) compared to males (around 19%). This is one of the strongest indicators of survival.
+
+Survival by Class: Passengers in 1st class had the highest survival rate (over 60%), followed by 2nd class (around 47%) and 3rd class (around 24%). This suggests a strong correlation between socio-economic status and survival.
+
+Age and Survival: A density plot showed that very young children had a higher survival rate. For adults, the survival chances were lower, especially for passengers between 20-40.
+
+Multivariate Analysis (Multiple Variables)
+Correlation Heatmap: A heatmap of numerical features showed:
+
+A negative correlation between pclass and fare, which makes sense as 1st class (pclass=1) has a higher fare.
+
+No single numerical feature had a very strong correlation with survived on its own, indicating that survival is likely influenced by a combination of factors.
+
+5. Feature Engineering
+A new feature, FamilySize, was created by combining the SibSp (siblings/spouses) and Parch (parents/children) columns.
+
+Survival by Family Size: Analysis of this new feature revealed that passengers who were alone (FamilySize=1) had a lower survival rate than those in small families (2-4 members). However, passengers in very large families (FamilySize > 4) also had a poor survival rate.
+
+6. Conclusion
+The EDA successfully identified key factors influencing survival on the Titanic:
+
+Gender: Being female was the most significant advantage for survival.
+
+Passenger Class: Higher-class passengers had a much better chance of surviving.
+
+Age: Young children had a higher survival rate than adults.
+
+Family Size: Traveling in a small family seemed to improve survival chances compared to traveling alone or in a very large family.
+
+This analysis provides a solid foundation for building a predictive machine learning model to determine a passenger's likelihood of survival.
